@@ -68,10 +68,9 @@ def run():
 
     # ciphertext = '2D7FEE79FFCE80B7DDB7BDA5A7F878CE298615476F86F3B890FD4746BE2D8F741395F884B4A35CE979'
 
-    decrypted = decrypt(key, ciphertext)
-    print('decrypted:', decrypted)
+    # decrypted = decrypt(key, ciphertext)
+    # print('decrypted:', decrypted)
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     run()
-
