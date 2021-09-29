@@ -64,7 +64,18 @@ def run():
 
     ciphertext = encrypt(key, plaintext)
     print('plaintext:', plaintext)
-    print('ciphertext:', ciphertext)
+    print('ciphertext RC4:', ciphertext)
+
+    # ciphertext = '2D7FEE79FFCE80B7DDB7BDA5A7F878CE298615476F86F3B890FD4746BE2D8F741395F884B4A35CE979'
+
+    # decrypted = decrypt(key, ciphertext)
+    # print('decrypted:', decrypted)
+
+
+def run(plaintext, show=False):
+    key = 'not-so-random-key'
+    ciphertext = encrypt(key, plaintext)
+    if show: print('ciphertext RC4:', ciphertext)
 
     # ciphertext = '2D7FEE79FFCE80B7DDB7BDA5A7F878CE298615476F86F3B890FD4746BE2D8F741395F884B4A35CE979'
 
