@@ -60,10 +60,18 @@ littleendian(b) = b0 + 2^8 b1 + 2^16 b2 + 2^24 b3
 
 Salsa20_hash(x) = x + doubleround^{10}(x)
 
+## AES ECB
+
+![Screenshot](imgs_for_readme/aes_ecb.png)
+
+## AES CBC
+
+![Screenshot](imgs_for_readme/aes_cbc.png)
+
 ## AES CTR
 
 ![Screenshot](imgs_for_readme/aes_ctr.png)
 
-## AES ECB
 
-![Screenshot](imgs_for_readme/aes_ecb.png)
+
+
