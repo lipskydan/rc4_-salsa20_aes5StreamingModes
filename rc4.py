@@ -58,20 +58,6 @@ def decrypt(key, ciphertext):
     return codecs.decode(res, 'hex_codec').decode('utf-8')
 
 
-def run():
-    key = 'not-so-random-key'
-    plaintext = 'Good work! Your implementation is correct'
-
-    ciphertext = encrypt(key, plaintext)
-    print('plaintext:', plaintext)
-    print('ciphertext RC4:', ciphertext)
-
-    # ciphertext = '2D7FEE79FFCE80B7DDB7BDA5A7F878CE298615476F86F3B890FD4746BE2D8F741395F884B4A35CE979'
-
-    # decrypted = decrypt(key, ciphertext)
-    # print('decrypted:', decrypted)
-
-
 def run(plaintext, show=False):
     key = 'not-so-random-key'
     ciphertext = encrypt(key, plaintext)
@@ -83,5 +69,3 @@ def run(plaintext, show=False):
     # print('decrypted:', decrypted)
 
 
-if __name__ == "__main__":
-    run()

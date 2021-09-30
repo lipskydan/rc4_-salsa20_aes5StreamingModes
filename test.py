@@ -1,8 +1,7 @@
 import unittest
-from asyncio import sleep
-
 import rc4, salsa20
-import os
+import aes as aes_logic
+
 
 
 class MY_TESTS(unittest.TestCase):
@@ -78,6 +77,17 @@ class MY_TESTS(unittest.TestCase):
 
         eq = b":\xd4\xd4\xccV\x95\xbfD\xc6`'X\x8f\xed\x02\xeb\xb6\xe0\x82\x83$\xdb\x8a\xd5Y]\xe2Rml\xac"
         assert salsa20.salsa20(m.encode('UTF-8'), n, k) == eq
+
+    @staticmethod
+    def test_9_aes():
+        plaintext = "Hello World!!!!!"
+
+        iv = b'initializationVe'
+        key = b'This_key_for_dem'
+
+        aes = aes_logic.AES(key, iv)
+
+        assert aes.decrypt_ctr(aes.encrypt_ctr(plaintext)) == plaintext
 
 
 if __name__ == '__main__':

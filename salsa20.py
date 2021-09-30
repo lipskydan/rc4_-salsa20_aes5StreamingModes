@@ -96,17 +96,6 @@ def salsa20(plaintext, nonce, key):
     return bytearray(enc_list)
 
 
-def run():
-    key = bytearray(range(1, 33))
-    nonce = bytearray([3, 1, 4, 1, 5, 9, 2, 6])
-    plaintext = 'Good work! Your implementation is correct'
-
-    ciphertext = salsa20(plaintext=plaintext.encode('UTF-8'), nonce=nonce, key=key)
-
-    print('plaintext:', plaintext)
-    print('ciphertext Salsa20:', ciphertext)
-
-
 def run(plaintext, show=False):
     key = bytearray(range(1, 33))
     nonce = bytearray([3, 1, 4, 1, 5, 9, 2, 6])
@@ -114,5 +103,3 @@ def run(plaintext, show=False):
     if show: print('ciphertext Salsa20:', ciphertext)
 
 
-if __name__ == "__main__":
-    run()
