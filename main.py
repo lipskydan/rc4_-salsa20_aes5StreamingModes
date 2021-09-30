@@ -19,23 +19,41 @@ def main():
     aes_cbc.run(plaintext=plaintext, key=key, show=True)
     aes_cfb.run(plaintext=plaintext, key=key, show=True)
 
-    # start = time.time()
-    # for i in range(TIMES): rc4.run(plaintext=plaintext)
-    # end = time.time()
-    #
-    # print(f'RC4 {TIMES} times works {end - start}s')
-    #
-    # start = time.time()
-    # for i in range(TIMES): salsa20.run(plaintext=plaintext)
-    # end = time.time()
-    #
-    # print(f'Salsa20 {TIMES} times works {end - start}s')
-    #
-    # start = time.time()
-    # for i in range(TIMES): aes_ctr.run(plaintext=plaintext)
-    # end = time.time()
-    #
-    # print(f'AES_CTR {TIMES} times works {end - start}s')
+    start = time.time()
+    for i in range(TIMES): rc4.run(plaintext=plaintext)
+    end = time.time()
+
+    print(f'RC4 {TIMES} times works {end - start}s')
+
+    start = time.time()
+    for i in range(TIMES): salsa20.run(plaintext=plaintext)
+    end = time.time()
+
+    print(f'Salsa20 {TIMES} times works {end - start}s')
+
+    start = time.time()
+    for i in range(TIMES): aes_ctr.run(plaintext=plaintext, key=key)
+    end = time.time()
+
+    print(f'AES_CTR {TIMES} times works {end - start}s')
+
+    start = time.time()
+    for i in range(TIMES): aes_ecb.run(plaintext=plaintext, key=key)
+    end = time.time()
+
+    print(f'AES_ECB {TIMES} times works {end - start}s')
+
+    start = time.time()
+    for i in range(TIMES): aes_cbc.run(plaintext=plaintext, key=key)
+    end = time.time()
+
+    print(f'AES_CBC {TIMES} times works {end - start}s')
+
+    start = time.time()
+    for i in range(TIMES): aes_cfb.run(plaintext=plaintext, key=key)
+    end = time.time()
+
+    print(f'AES_CFB {TIMES} times works {end - start}s')
 
 
 if __name__ == '__main__':

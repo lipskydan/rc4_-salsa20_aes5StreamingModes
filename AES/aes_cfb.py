@@ -16,7 +16,6 @@ class AES_CFB():
         self.iv = Random.new().read(AES.block_size)
 
     def check_key(self, key):
-        '检测key的长度是否为16,24或者32bytes的长度'
         try:
             if isinstance(key, bytes):
                 assert len(key) in [16, 24, 32]
@@ -25,28 +24,25 @@ class AES_CFB():
                 assert len(key.encode()) in [16, 24, 32]
                 return key.encode()
             else:
-                raise Exception(f'密钥必须为str或bytes,不能为{type(key)}')
+                raise Exception(f'!!!!{type(key)}')
         except AssertionError:
-            print('输入的长度不正确')
+            print('!!!!')
 
     def check_data(self, data):
-        '检测加密的数据类型'
         if isinstance(data, str):
             data = data.encode()
         elif isinstance(data, bytes):
             pass
         else:
-            raise Exception(f'加密的数据必须为str或bytes,不能为{type(data)}')
+            raise Exception(f'!!!!{type(data)}')
         return data
 
     def encrypt(self, data):
-        ' 加密函数 '
         data = self.check_data(data)
         cryptor = AES.new(self.key, self.mode, self.iv)
         return b2a_hex(cryptor.encrypt(data)).decode()
 
     def decrypt(self, data):
-        ' 解密函数 '
         data = self.check_data(data)
         cryptor = AES.new(self.key, self.mode, self.iv)
         return cryptor.decrypt(a2b_hex(data)).decode()
