@@ -1,7 +1,7 @@
 import unittest
-import rc4, salsa20
-import aes as aes_logic
-
+from Salsa20 import salsa20
+from RC4 import rc4
+from AES import aes_ctr as aes_logic
 
 
 class MY_TESTS(unittest.TestCase):

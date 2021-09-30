@@ -100,6 +100,11 @@ def run(plaintext, show=False):
     key = bytearray(range(1, 33))
     nonce = bytearray([3, 1, 4, 1, 5, 9, 2, 6])
     ciphertext = salsa20(plaintext=plaintext.encode('UTF-8'), nonce=nonce, key=key)
-    if show: print('ciphertext Salsa20:', ciphertext)
+
+    if show:
+        print("-----------------------------")
+        print('ciphertext Salsa20:', ciphertext)
+        print("-----------------------------\n")
+
 
 

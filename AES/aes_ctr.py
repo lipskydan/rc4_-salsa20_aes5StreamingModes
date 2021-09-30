@@ -7,11 +7,11 @@ def random(size=16):
     return rand
 
 
-class AES:
+class AES_CTR:
     rounds_by_key_size = {16: 10, 24: 12, 32: 14}
 
     def __init__(self, key=b'This_key_for_dem', iv=b'initializationVe'):
-        assert len(key) in AES.rounds_by_key_size
+        assert len(key) in AES_CTR.rounds_by_key_size
         self.iv = [iv[i] for i in range(len(iv))]
         self.aes = pyaes.AES(key)
 
@@ -31,11 +31,6 @@ class AES:
             return [(x ^ y) for (x, y) in zip(a[:len(b)], b)]
         else:
             return [(x ^ y) for (x, y) in zip(a, b[:len(a)])]
-
-    # def split_16bytes(self, message):
-    #     assert len(message) % 16 == 0
-    #     message_16bytes = [message[i:i + 16] for i in range(0, len(message), 16)]
-    #     return message_16bytes
 
     def split_bytes(self, message):
         message_bytes = []
@@ -66,7 +61,14 @@ def run(plaintext, show=False):
     iv = b'initializationVe'
     key = b'This_key_for_dem'
 
-    aes = AES(key, iv)
+    aes = AES_CTR(key, iv)
 
     ciphertext = aes.encrypt_ctr(plaintext)
-    if show: print('ciphertext AES:', ciphertext)
+    if show:
+        print("-----------------------------")
+        print('ciphertext AES_CTR:', ciphertext)
+
+    decrypted = aes.decrypt_ctr(ciphertext)
+    if show:
+        print('decrypted by AES_CTR:', decrypted)
+        print("-----------------------------\n")
