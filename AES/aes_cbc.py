@@ -39,7 +39,6 @@ class AES_CBC:
         message_16bytes = [message[i:i + 16] for i in range(0, len(message), 16)]
         return message_16bytes
 
-
     def encrypt_cbc(self, text):
         iv = self.iv
         text = self.PKCS_pad(text)
@@ -70,9 +69,8 @@ class AES_CBC:
         return self.PKCS_unpad("".join([chr(blocks[i]) for i in range(len(blocks))]))
 
 
-def run(plaintext, show=False):
+def run(plaintext, key, show=False):
     iv = b'initializationVe'
-    key = b'This_key_for_dem'
 
     aes = AES_CBC(key, iv)
 

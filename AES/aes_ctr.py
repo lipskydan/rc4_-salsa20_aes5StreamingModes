@@ -57,9 +57,8 @@ class AES_CTR:
         return self.encrypt_ctr(cipher)
 
 
-def run(plaintext, show=False):
+def run(plaintext, key, show=False):
     iv = b'initializationVe'
-    key = b'This_key_for_dem'
 
     aes = AES_CTR(key, iv)
 

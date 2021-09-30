@@ -36,8 +36,7 @@ class AES_ECB(object):
         return bytes.decode(plain_text).rstrip('\0')
 
 
-def run(plaintext, show=False):
-    key = b'This_key_for_dem'
+def run(plaintext, key, show=False):
     aes = AES_ECB(key)
 
     ciphertext = aes.encrypt(plaintext)
