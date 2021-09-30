@@ -1,6 +1,6 @@
 from Salsa20 import salsa20
 from RC4 import rc4
-from AES import aes_ctr, aes_ecb
+from AES import aes_ctr, aes_ecb, aes_cbc
 import time
 
 
@@ -14,6 +14,7 @@ def main():
     salsa20.run(plaintext=plaintext, show=True)
     aes_ctr.run(plaintext=plaintext, show=True)
     aes_ecb.run(plaintext=plaintext, show=True)
+    aes_cbc.run(plaintext=plaintext, show=True)
 
     # start = time.time()
     # for i in range(TIMES): rc4.run(plaintext=plaintext)
