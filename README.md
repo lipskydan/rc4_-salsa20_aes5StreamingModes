@@ -68,9 +68,14 @@ Salsa20_hash(x) = x + doubleround^{10}(x)
 
 ![Screenshot](imgs_for_readme/aes_cbc.png)
 
+## AES CFB 
+
+![Screenshot](imgs_for_readme/aes_cfb.png)
+
 ## AES CTR
 
 ![Screenshot](imgs_for_readme/aes_ctr.png)
+
 
 
 
