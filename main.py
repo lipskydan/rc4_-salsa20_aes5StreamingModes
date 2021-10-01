@@ -1,6 +1,6 @@
 from Salsa20 import salsa20
 from RC4 import rc4
-from AES import aes_ctr, aes_ecb, aes_cbc, aes_cfb
+from AES import aes_ctr, aes_ecb, aes_cbc, aes_cfb, aes_ofb
 import time
 
 
@@ -18,6 +18,7 @@ def main():
     aes_ecb.run(plaintext=plaintext, key=key, show=True)
     aes_cbc.run(plaintext=plaintext, key=key, show=True)
     aes_cfb.run(plaintext=plaintext, key=key, show=True)
+    aes_ofb.run(plaintext=plaintext, show=True)
 
     start = time.time()
     for i in range(TIMES): rc4.run(plaintext=plaintext)
@@ -54,6 +55,12 @@ def main():
     end = time.time()
 
     print(f'AES_CFB {TIMES} times works {end - start}s')
+
+    start = time.time()
+    for i in range(TIMES): aes_ofb.run(plaintext=plaintext)
+    end = time.time()
+
+    print(f'AES_OFB {TIMES} times works {end - start}s')
 
 
 if __name__ == '__main__':
