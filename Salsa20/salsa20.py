@@ -1,4 +1,5 @@
 import os
+from tools.time_execution import time_exec
 
 
 def rot_left(x, y): return ((x << y) % (2 ** 32 - 1))
@@ -83,7 +84,7 @@ sig_2 = [50, 45, 98, 121]
 sig_3 = [116, 101, 32, 107]
 
 
-def salsa20(plaintext, nonce, key):
+def salsa20_alg(plaintext, nonce, key):
     assert len(nonce) == 8
     assert len(key) == 32
     _nonce = list(nonce)
@@ -96,10 +97,11 @@ def salsa20(plaintext, nonce, key):
     return bytearray(enc_list)
 
 
-def run(plaintext, show=False):
+@time_exec
+def salsa20(plaintext,key='', show=False):
     key = bytearray(range(1, 33))
     nonce = bytearray([3, 1, 4, 1, 5, 9, 2, 6])
-    ciphertext = salsa20(plaintext=plaintext.encode('UTF-8'), nonce=nonce, key=key)
+    ciphertext = salsa20_alg(plaintext=plaintext.encode('UTF-8'), nonce=nonce, key=key)
 
     if show:
         print("-----------------------------")

@@ -6,6 +6,8 @@ sys.modules['Crypto'] = crypto
 from crypto.Cipher import AES
 from binascii import b2a_hex, a2b_hex
 
+from tools.time_execution import time_exec
+
 
 class AES_ECB(object):
 
@@ -36,7 +38,8 @@ class AES_ECB(object):
         return bytes.decode(plain_text).rstrip('\0')
 
 
-def run(plaintext, key, show=False):
+@time_exec
+def aes_ecb(plaintext, key, show=False):
     aes = AES_ECB(key)
 
     ciphertext = aes.encrypt(plaintext)

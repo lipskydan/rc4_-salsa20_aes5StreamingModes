@@ -1,6 +1,8 @@
 import pyaes
 import os
 
+from tools.time_execution import time_exec
+
 
 def random(size=16):
     rand = os.urandom(size)
@@ -57,7 +59,7 @@ class AES_CTR:
         return self.encrypt_ctr(cipher)
 
 
-def run(plaintext, key, show=False):
+def aes_ctr(plaintext, key, show=False):
     iv = b'initializationVe'
 
     aes = AES_CTR(key, iv)

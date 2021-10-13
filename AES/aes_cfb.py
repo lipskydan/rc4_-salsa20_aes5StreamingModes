@@ -8,6 +8,7 @@ from binascii import b2a_hex, a2b_hex
 from crypto import Random
 import base64
 
+from tools.time_execution import time_exec
 
 class AES_CFB():
     def __init__(self, key, mode=AES.MODE_CFB):
@@ -48,7 +49,8 @@ class AES_CFB():
         return cryptor.decrypt(a2b_hex(data)).decode()
 
 
-def run(plaintext, key, show=False):
+@time_exec
+def aes_cfb(plaintext, key, show=False):
     aes = AES_CFB(key)
 
     ciphertext = aes.encrypt(plaintext)

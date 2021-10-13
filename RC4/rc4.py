@@ -1,4 +1,5 @@
 import codecs
+from tools.time_execution import time_exec
 
 MOD = 256
 
@@ -58,7 +59,8 @@ def decrypt(key, ciphertext):
     return codecs.decode(res, 'hex_codec').decode('utf-8')
 
 
-def run(plaintext, show=False):
+@time_exec
+def rc4(plaintext, key='', show=False):
     key = 'not-so-random-key'
     ciphertext = encrypt(key, plaintext)
 

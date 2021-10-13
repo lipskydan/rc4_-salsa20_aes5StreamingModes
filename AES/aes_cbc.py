@@ -1,6 +1,7 @@
 import pyaes
 import os
 
+from tools.time_execution import time_exec
 
 def random(size=16):
     rand = os.urandom(size)
@@ -69,7 +70,8 @@ class AES_CBC:
         return self.PKCS_unpad("".join([chr(blocks[i]) for i in range(len(blocks))]))
 
 
-def run(plaintext, key, show=False):
+@time_exec
+def aes_cbc(plaintext, key, show=False):
     iv = b'initializationVe'
 
     aes = AES_CBC(key, iv)
