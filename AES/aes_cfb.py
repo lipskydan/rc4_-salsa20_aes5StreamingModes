@@ -10,6 +10,7 @@ import base64
 
 from tools.time_execution import time_exec
 
+
 class AES_CFB():
     def __init__(self, key, mode=AES.MODE_CFB):
         self.key = self.check_key(key)

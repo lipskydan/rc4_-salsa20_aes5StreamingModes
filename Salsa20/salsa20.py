@@ -44,17 +44,39 @@ def littleendian(b):
     return b[0] ^ (b[1] << 8) ^ (b[2] << 16) ^ (b[3] << 24)
 
 
-# def littleendian_invert(w):
-#     return [w & 0xff, (w >> 8) & 0xff, (w >> 16) & 0xff, (w >> 24) & 0xff]
-#
-#
-# # assert littleendian_invert(0x091e4b56) == [86, 75, 30, 9]
-# # assert littleendian_invert(0xfaffffff) == [255, 255, 255, 250]
+def littleendian_invert(w):
+    return [w & 0xff, (w >> 8) & 0xff, (w >> 16) & 0xff, (w >> 24) & 0xff]
 
 
-# 8 The Salsa20 hash function
+# assert littleendian_invert(0x091e4b56) == [86, 75, 30, 9]
+# assert littleendian_invert(0xfaffffff) == [255, 255, 255, 250]
+
 
 def salsa_20_hash(x):
+    _x = [0] * 16
+    i = 0
+    k = 0
+    while i < 16:
+        _x[i] = littleendian([x[k], x[k + 1], x[k + 2], x[k + 3]])
+        k += 4
+        i += 1
+
+    z = _x
+    for j in range(10):
+        z = doubleround(z)
+
+    y = []
+    for i in range(16):
+        w = z[i] + _x[i]
+        y.append(w & 0xff)
+        y.append((w >> 8) & 0xff)
+        y.append((w >> 16) & 0xff)
+        y.append((w >> 24) & 0xff)
+
+    return y
+
+
+def salsa_20_hash_invert(x):
     _x = [0] * 16
     i = 0
     k = 0
@@ -84,7 +106,7 @@ sig_2 = [50, 45, 98, 121]
 sig_3 = [116, 101, 32, 107]
 
 
-def salsa20_alg(plaintext, nonce, key):
+def encrypt(plaintext, nonce, key):
     assert len(nonce) == 8
     assert len(key) == 32
     _nonce = list(nonce)
@@ -97,16 +119,32 @@ def salsa20_alg(plaintext, nonce, key):
     return bytearray(enc_list)
 
 
+def decrypt(ciphertext, nonce, key):
+    assert len(nonce) == 8
+    assert len(key) == 32
+    _nonce = list(nonce)
+    _key = list(key)
+    block_counter = [0] * 8
+    k0 = _key[:16]
+    k1 = _key[16:]
+    enc_list = [a ^ b for a, b in
+                zip(salsa_20_hash(sig_0 + k0 + sig_1 + _nonce + block_counter + sig_2 + k1 + sig_3), list(ciphertext))]
+    return bytearray(enc_list)
+
+
 @time_exec
-def salsa20(plaintext,key='', show=False):
+def salsa20(plaintext, key='', show=False):
     key = bytearray(range(1, 33))
     nonce = bytearray([3, 1, 4, 1, 5, 9, 2, 6])
-    ciphertext = salsa20_alg(plaintext=plaintext.encode('UTF-8'), nonce=nonce, key=key)
+    ciphertext = encrypt(plaintext=plaintext.encode('UTF-8'), nonce=nonce, key=key)
 
     if show:
         print("-----------------------------")
         print('ciphertext Salsa20:', ciphertext)
         print("-----------------------------\n")
 
+    decrypted = decrypt(ciphertext=ciphertext, nonce=nonce, key=key).decode("utf-8")
 
-
+    if show:
+        print('decrypted by Salsa20:', decrypted)
+        print("-----------------------------\n")
